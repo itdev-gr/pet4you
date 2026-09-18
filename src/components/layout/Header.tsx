@@ -30,8 +30,23 @@ function SearchField({ id, className = "" }: { id: string; className?: string })
   );
 }
 
+/**
+ * Το μενού είναι διακόσμηση, όχι περιεχόμενο σελίδας: αν η βάση δεν απαντήσει,
+ * το κατάστημα πρέπει να εμφανίζεται με λογότυπο, αναζήτηση και καλάθι αντί να
+ * σκάει κάθε σελίδα — συμπεριλαμβανομένου του `/_not-found`, που προ-χτίζεται
+ * και θα ρίξει ολόκληρο το build.
+ */
+async function loadMenu() {
+  try {
+    return await getMenu();
+  } catch (error) {
+    console.error("Το μενού δεν φορτώθηκε:", error);
+    return [];
+  }
+}
+
 export async function Header() {
-  const menu = await getMenu();
+  const menu = await loadMenu();
 
   return (
     <header className="bg-white">
