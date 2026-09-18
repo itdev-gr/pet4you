@@ -1,26 +1,69 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  /* Παλέτα από το mockup: βαθύ πράσινο, ζωηρό πορτοκαλί CTA, ζεστό κίτρινο,
+     σχεδόν λευκή ουδέτερη βάση. */
+  --color-forest: #064b38;
+  --color-forest-dark: #04382a;
+  --color-forest-light: #0d6349;
+  /* Το ζωηρό πορτοκαλί του mockup (#ff650f) δίνει μόνο 2,95:1 με λευκά
+     γράμματα — κάτω από το 4,5:1 που απαιτεί το WCAG AA, και κάτω από το 3:1
+     για εικονίδια. Ίδια απόχρωση, πιο σκούρο: 4,59:1. Το αρχικό μένει
+     διαθέσιμο για καθαρά διακοσμητικά στοιχεία χωρίς κείμενο. */
+  --color-tangerine: #cc4b00;
+  --color-tangerine-dark: #b84300;
+  --color-tangerine-bright: #ff650f;
+  --color-sunshine: #ffe48b;
+  --color-sunshine-soft: #fff4cf;
+  --color-cream: #fafbf9;
+  --color-sand: #f1efe8;
+  --color-sage: #c9d3be;
+  --color-sage-soft: #e4ecdd;
+  --color-lilac: #cdb9e6;
+  --color-lilac-soft: #ece4f6;
+  --color-ink: #17251d;
+  --color-ink-soft: #5b6660;
+  --color-line: #e7e4db;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  /* Τα --font-*-family ορίζονται από το next/font στο <body>. Χωριστά ονόματα
+     ώστε τα tokens του theme να μην αναφέρονται στον εαυτό τους. */
+  --font-sans: var(--font-body-family), system-ui, sans-serif;
+  --font-display: var(--font-display-family), var(--font-body-family), system-ui, sans-serif;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --radius-card: 0.875rem;
+  --radius-tile: 1.5rem;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+/* Ορατός δείκτης εστίασης για πλοήγηση με πληκτρολόγιο. Τα πεδία σβήνουν το
+   προεπιλεγμένο outline για να κρατήσουν το στρογγυλεμένο σχήμα τους, οπότε ο
+   δείκτης ορίζεται εδώ ρητά — αλλιώς η πλοήγηση με Tab γίνεται αόρατη. */
+:focus-visible {
+  outline: 2px solid var(--color-forest);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

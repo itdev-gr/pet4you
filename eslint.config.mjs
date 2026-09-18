@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Τοπικά διαγνωστικά scripts του review, δεν παραδίδονται με την εφαρμογή.
+    "e2e/review/**",
   ]),
 ]);
 
